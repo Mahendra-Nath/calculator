@@ -1,0 +1,15 @@
+- name: Pull Docker Image of Calculator
+  hosts: all
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+    - name: Pull image
+      docker_image:
+        name: mahendra3/calculator:latest
+        source: pull
+    - name: stop container
+      shell: docker stop Calculator
+    - name: rm container
+      shell: docker rm Calculator
+    - name: Running container
+      shell: docker run -it -d --name Calculator mahendra3/calculator:latest

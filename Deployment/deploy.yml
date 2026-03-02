@@ -7,9 +7,19 @@
       docker_image:
         name: mahendra3/calculator:latest
         source: pull
-    - name: stop container
+
+    - name: Check if container exists
+      shell: docker ps -a --filter "name=Calculator" --format "{{'{{'}}.Names{{'}}'}}"
+      register: container_check
+      ignore_errors: yes
+
+    - name: Stop container
       shell: docker stop Calculator
-    - name: rm container
+      when: container_check.stdout == "Calculator"
+
+    - name: Remove container
       shell: docker rm Calculator
+      when: container_check.stdout == "Calculator"
+
     - name: Running container
       shell: docker run -it -d --name Calculator mahendra3/calculator:latest

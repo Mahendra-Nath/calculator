@@ -15,7 +15,8 @@ public class Main {
 
             System.out.println("\n===== Scientific Calculator =====");
             System.out.println("1. Square Root (√x)");
-            System.out.println("2. Exit");
+            System.out.println("2. Factorial (x!)");
+            System.out.println("3. Exit");
             System.out.print("Enter your choice: ");
 
             choice = scanner.nextInt();
@@ -27,7 +28,14 @@ public class Main {
                     double num = scanner.nextDouble();
                     System.out.println("Result = " + squareRoot(num));
                     break;
+
                 case 2:
+                    System.out.print("Enter integer: ");
+                    int n = scanner.nextInt();
+                    System.out.println("Result = " + factorial(n));
+                    break;
+
+                case 3:
                     logger.info("Calculator Closed");
                     System.out.println("Exiting Calculator...");
                     scanner.close();
@@ -43,5 +51,13 @@ public class Main {
     public static double squareRoot(double x) {
         logger.info("Calculating square root of " + x);
         return Math.sqrt(x);
+    }
+    public static long factorial(int n) {
+        logger.info("Calculating factorial of " + n);
+        long result = 1;
+        for(int i = 1; i <= n; i++) {
+            result *= i;
+        }
+        return result;
     }
 }

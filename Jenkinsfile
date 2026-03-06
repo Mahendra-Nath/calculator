@@ -7,7 +7,7 @@ pipeline {
 
     stages{
 
-        stage('stage 1: Git clone repo') {
+        stage(' 1: cloning repository from GitHub') {
             steps {
                 git branch: 'main' ,
                 url: ' https://github.com/Mahendra-Nath/calculator.git '
@@ -16,11 +16,17 @@ pipeline {
 
         stage(' 2: Maven Build ') {
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean install -DskipTests'
             }
         }
 
-        stage(" 3: Build Docker Image ") {
+        stage(' 3: Unit Testing ') {
+                    steps {
+                        sh 'mvn test'
+                    }
+                }
+
+        stage(" 4: Building Docker Image ") {
             steps {
                 script{
                     docker_image = docker.build "$IMAGE_NAME:latest"
@@ -29,7 +35,7 @@ pipeline {
             }
         }
 
-        stage(" 4 : Push Docker image to HUB") {
+        stage(" 5: Pushing Docker image to DockerHub") {
 
             steps {
                 withCredentials([usernamePassword(credentialsId: 'DockerPwd',
@@ -43,7 +49,7 @@ pipeline {
             }
         }
 
-        stage('Stage 5: clean Docker Images') {
+        stage(' 6: clean Docker Images') {
             steps {
                 script {
                     sh 'docker container prune -f'
@@ -52,7 +58,7 @@ pipeline {
             }
         }
 
-        stage('Stage 6: Ansible Deployment') {
+        stage(' 7: Ansible Deployment') {
             steps {
 
                 sh 'ansible-playbook Deployment/deploy.yml -i Deployment/inventory.ini '
@@ -65,7 +71,7 @@ pipeline {
     post {
         always {
             mail(
-                to: 'mahendranath281201@gmail.com,Mahendranath.Gulla@iiitb.ac.in',
+                to: 'mahendranath281201@gmail.com',
                 subject: "Build ${currentBuild.currentResult}",
                 body: "Build URL: ${env.BUILD_URL}"
             )

@@ -13,10 +13,12 @@ public class Main {
         logger.info("Scientific Calculator Started");
         while(true) {
 
-            System.out.println("\n===== Scientific Calculator =====");
+            System.out.println("\n===================== Scientific Calculator ======================");
             System.out.println("1. Square Root (√x)");
             System.out.println("2. Factorial (x!)");
-            System.out.println("3. Exit");
+            System.out.println("3. Natural Logarithm ln(x)");
+            System.out.println("4. Power (x^b)");
+            System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
 
             choice = scanner.nextInt();
@@ -36,6 +38,20 @@ public class Main {
                     break;
 
                 case 3:
+                    System.out.print("Enter number: ");
+                    double logNum = scanner.nextDouble();
+                    System.out.println("Result = " + naturalLog(logNum));
+                    break;
+
+                case 4:
+                    System.out.print("Enter base: ");
+                    double base = scanner.nextDouble();
+                    System.out.print("Enter exponent: ");
+                    double exponent = scanner.nextDouble();
+                    System.out.println("Result = " + power(base, exponent));
+                    break;
+
+                case 5:
                     logger.info("Calculator Closed");
                     System.out.println("Exiting Calculator...");
                     scanner.close();
@@ -59,5 +75,13 @@ public class Main {
             result *= i;
         }
         return result;
+    }
+    public static double naturalLog(double x) {
+        logger.info("Calculating natural log of " + x);
+        return Math.log(x);
+    }
+    public static double power(double base, double exponent) {
+        logger.info("Calculating power: " + base + "^" + exponent);
+        return Math.pow(base, exponent);
     }
 }

@@ -13,11 +13,55 @@ public class CalculatorTest {
         calculator = new Main();
     }
     @Test
-    public void test_squareroot(){
+    public void testSquareRoot(){
         double a = 4;
         double expectedResult = 2.0;
-        Assert.assertEquals(expectedResult, calculator.squareRoot(a),0.0000);
+        Assert.assertEquals(expectedResult, calculator.squareRoot(a),0.0001);
     }
 
+    @Test
+    public void testSquareRootOfOne(){
+        double a = 1;
+        double expectedResult = 1.0;
+        Assert.assertEquals(expectedResult, calculator.squareRoot(a),0.0001);
+    }
+    @Test
+    public void testFactorial(){
+        int a = 5;
+        long expectedResult = 120;
+        Assert.assertEquals(expectedResult, calculator.factorial(a));
+    }
+    @Test
+    public void testFactorialOfZero(){
+        int a = 0;
+        long expectedResult = 1;
+        Assert.assertEquals(expectedResult, calculator.factorial(a));
+    }
+    @Test
+    public void testNaturalLog(){
+        double a = Math.E;
+        double expectedResult = 1.0;
+        Assert.assertEquals(expectedResult, calculator.naturalLog(a),0.0001);
+    }
+    @Test
+    public void testNaturalLogOfOne(){
+        double a = 1;
+        double expectedResult = 0.0;
+        Assert.assertEquals(expectedResult, calculator.naturalLog(a),0.0001);
+    }
+    @Test
+    public void testPower(){
+        double base = 2;
+        double exponent = 3;
+        double expectedResult = 8.0;
+        Assert.assertEquals(expectedResult, calculator.power(base, exponent),0.0001);
+    }
+    @Test
+    public void testPowerWithZeroExponent(){
+        double base = 5;
+        double exponent = 0;
+        double expectedResult = 1.0;
+        Assert.assertEquals(expectedResult, calculator.power(base, exponent),0.0001);
+    }
 
 }

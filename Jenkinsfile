@@ -60,6 +60,16 @@ pipeline {
             }
         }
 
-
     }
+
+    post {
+        always {
+            mail(
+                to: 'mahendranath281201@gmail.com,Mahendranath.Gulla@iiitb.ac.in',
+                subject: "Build ${currentBuild.currentResult}",
+                body: "Build URL: ${env.BUILD_URL}"
+            )
+        }
+    }
+
 }

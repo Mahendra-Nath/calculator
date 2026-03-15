@@ -34,7 +34,11 @@ public class Main {
                 case 2:
                     System.out.print("Enter integer: ");
                     int n = scanner.nextInt();
-                    System.out.println("Result = " + factorial(n));
+                    if (n < 0) {
+                        System.out.println("Factorial is not defined for negative numbers.");
+                    } else {
+                        System.out.println("Result = " + factorial(n));
+                    }
                     break;
 
                 case 3:

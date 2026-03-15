@@ -3,6 +3,7 @@ package org.example;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.Scanner;
+import java.math.BigInteger;
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
     public static void main(String[] args) {
@@ -72,12 +73,15 @@ public class Main {
         logger.info("Calculating square root of " + x);
         return Math.sqrt(x);
     }
-    public static long factorial(int n) {
+    public static BigInteger factorial(int n) {
         logger.info("Calculating factorial of " + n);
-        long result = 1;
-        for(int i = 1; i <= n; i++) {
-            result *= i;
+
+        BigInteger result = BigInteger.ONE;
+
+        for (int i = 1; i <= n; i++) {
+            result = result.multiply(BigInteger.valueOf(i));
         }
+
         return result;
     }
     public static double naturalLog(double x) {

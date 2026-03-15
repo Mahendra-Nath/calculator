@@ -2,6 +2,7 @@ import org.example.Main;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import java.math.BigInteger;
 
 
 
@@ -28,13 +29,14 @@ public class CalculatorTest {
     @Test
     public void testFactorial(){
         int a = 5;
-        long expectedResult = 120;
+        BigInteger expectedResult = BigInteger.valueOf(120);
         Assert.assertEquals(expectedResult, calculator.factorial(a));
     }
+
     @Test
     public void testFactorialOfZero(){
         int a = 0;
-        long expectedResult = 1;
+        BigInteger expectedResult = BigInteger.ONE;
         Assert.assertEquals(expectedResult, calculator.factorial(a));
     }
     @Test
